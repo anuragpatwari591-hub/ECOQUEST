@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Manage Lessons{% endblock %}
+{% block content %}
+<h1>Lessons</h1>
+<form method="POST" class="card mb-2">
+    <h3>Add Lesson</h3>
+    <div class="form-group">
+        <label>Topic</label>
+        <select name="topic_id" class="form-control" required>
+            {% for t in topics %}<option value="{{ t.topic_id }}">{{ t.name }}</option>{% endfor %}
+        </select>
+    </div>
+    <div class="form-group"><label>Title</label><input type="text" name="title" class="form-control" required></div>
+    <div class="form-group">
+        <label>Difficulty</label>
+        <select name="difficulty" class="form-control">
+            <option>Beginner</option><option>Intermediate</option><option>Advanced</option>
+        </select>
+    </div>
+    <div class="form-group"><label>Introduction</label><textarea name="introduction" class="form-control" rows="2"></textarea></div>
+    <div class="form-group"><label>Explanation</label><textarea name="explanation" class="form-control" rows="3"></textarea></div>
+    <div class="form-group"><label>Key Points (one per line)</label><textarea name="key_points" class="form-control" rows="3"></textarea></div>
+    <div class="form-group"><label>Eco Tip</label><input type="text" name="eco_tip" class="form-control"></div>
+    <div class="form-group"><label>XP Reward</label><input type="number" name="xp_reward" class="form-control" value="10"></div>
+    <button type="submit" class="btn btn-primary">Add Lesson</button>
+</form>
+<table class="data-table">
+    <thead><tr><th>Title</th><th>Topic</th><th>Difficulty</th><th>XP</th></tr></thead>
+    <tbody>
+    {% for l in lessons %}
+        <tr><td>{{ l.title }}</td><td>{{ l.topic_name }}</td><td>{{ l.difficulty }}</td><td>{{ l.xp_reward }}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

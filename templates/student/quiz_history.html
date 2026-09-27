@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Quiz History{% endblock %}
+{% block content %}
+<h1>My Quiz History</h1>
+{% if attempts %}
+<table class="data-table">
+    <thead><tr><th>Quiz</th><th>Score</th><th>XP Earned</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+    {% for a in attempts %}
+        <tr>
+            <td>{{ a.quiz_title }}</td>
+            <td>{{ a.score }}/{{ a.total_questions }}</td>
+            <td>+{{ a.xp_earned }}</td>
+            <td>{{ a.attempted_at.strftime('%d %b %Y') }}</td>
+            <td><a href="{{ url_for('quiz.review', attempt_id=a.attempt_id) }}">Review</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="text-muted">You haven't attempted any quizzes yet.</p>
+{% endif %}
+{% endblock %}

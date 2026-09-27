@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}My Progress{% endblock %}
+{% block content %}
+<h1>My Progress</h1>
+
+<div class="card mb-2">
+    <h3>Topic-wise Progress</h3>
+    <canvas id="progressChart" height="120"></canvas>
+</div>
+
+<div class="card mb-2">
+    <h3>Badges</h3>
+    <div>
+        {% for b in all_badges %}
+            {% set earned = badges | selectattr('name', 'equalto', b.name) | list %}
+            <span class="badge-pill {{ '' if earned else 'badge-locked' }}" title="{{ b.description }}">
+                {{ b.icon }} {{ b.name }}
+            </span>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="card">
+    <h3>Activity History</h3>
+    <table class="data-table">
+        <thead><tr><th>Type</th><th>Description</th><th>XP</th><th>Date</th></tr></thead>
+        <tbody>
+        {% for a in activity %}
+            <tr>
+                <td>{{ a.activity_type.replace('_', ' ')|title }}</td>
+                <td>{{ a.description }}</td>
+                <td>{{ '+' if a.xp_change > 0 }}{{ a.xp_change }}</td>
+                <td>{{ a.created_at.strftime('%d %b %Y') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script>
+const ctx = document.getElementById('progressChart');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for p in progress_rows %}"{{ p.name }}",{% endfor %}],
+        datasets: [{
+            label: 'Progress %',
+            data: [{% for p in progress_rows %}{{ p.progress_percent }},{% endfor %}],
+            backgroundColor: '#2fb872'
+        }]
+    },
+    options: { scales: { y: { beginAtZero: true, max: 100 } } }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Quizzes{% endblock %}
+{% block content %}
+<h1>Quizzes</h1>
+<table class="data-table">
+    <thead><tr><th>Title</th><th>Topic</th><th>Questions</th></tr></thead>
+    <tbody>
+    {% for q in quizzes %}
+        <tr><td>{{ q.title }}</td><td>{{ q.topic_name }}</td><td>{{ q.question_count }}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

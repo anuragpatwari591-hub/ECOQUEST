@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h1>Admin Dashboard</h1>
+<div class="card-grid">
+    <div class="stat-tile"><div class="stat-value">{{ stats.total_users }}</div><div class="stat-label">Total Users</div></div>
+    <div class="stat-tile alt"><div class="stat-value">{{ stats.students }}</div><div class="stat-label">Students</div></div>
+    <div class="stat-tile"><div class="stat-value">{{ stats.teachers }}</div><div class="stat-label">Teachers</div></div>
+    <div class="stat-tile alt"><div class="stat-value">{{ stats.topics }}</div><div class="stat-label">Topics</div></div>
+    <div class="stat-tile"><div class="stat-value">{{ stats.lessons }}</div><div class="stat-label">Lessons</div></div>
+    <div class="stat-tile alt"><div class="stat-value">{{ stats.quizzes }}</div><div class="stat-label">Quizzes</div></div>
+    <div class="stat-tile"><div class="stat-value">{{ stats.challenges }}</div><div class="stat-label">Challenges</div></div>
+    <div class="stat-tile alt"><div class="stat-value">{{ stats.quiz_attempts }}</div><div class="stat-label">Quiz Attempts</div></div>
+    <div class="stat-tile"><div class="stat-value">{{ stats.challenges_completed }}</div><div class="stat-label">Challenges Completed</div></div>
+</div>
+
+<div class="mt-2">
+    <a href="{{ url_for('admin.users') }}" class="btn btn-primary">Manage Users</a>
+    <a href="{{ url_for('admin.topics') }}" class="btn btn-outline">Manage Topics</a>
+    <a href="{{ url_for('admin.lessons') }}" class="btn btn-outline">Manage Lessons</a>
+    <a href="{{ url_for('admin.badges') }}" class="btn btn-outline">Manage Badges</a>
+</div>
+{% endblock %}

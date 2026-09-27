@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Manage Challenges{% endblock %}
+{% block content %}
+<h1>Challenges</h1>
+
+<form method="POST" class="card mb-2">
+    <h3>Create New Challenge</h3>
+    <div class="form-group"><label>Title</label><input type="text" name="title" class="form-control" required></div>
+    <div class="form-group"><label>Description</label><textarea name="description" class="form-control" rows="2"></textarea></div>
+    <div class="form-group"><label>Category</label><input type="text" name="category" class="form-control" placeholder="e.g. Waste Management"></div>
+    <div class="form-group">
+        <label>Difficulty</label>
+        <select name="difficulty" class="form-control">
+            <option>Easy</option><option>Medium</option><option>Hard</option>
+        </select>
+    </div>
+    <div class="form-group"><label>XP Reward</label><input type="number" name="xp_reward" class="form-control" value="20" min="5" max="100"></div>
+    <button type="submit" class="btn btn-primary">Create Challenge</button>
+</form>
+
+<table class="data-table">
+    <thead><tr><th>Title</th><th>Category</th><th>Difficulty</th><th>XP</th><th>Completions</th></tr></thead>
+    <tbody>
+    {% for c in challenges %}
+        <tr>
+            <td>{{ c.title }}</td><td>{{ c.category }}</td><td>{{ c.difficulty }}</td>
+            <td>{{ c.xp_reward }}</td><td>{{ c.completion_count }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

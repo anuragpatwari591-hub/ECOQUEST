@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ quiz.title }}{% endblock %}
+{% block content %}
+<div class="card" style="max-width:600px;margin:0 auto;">
+    <p class="quiz-progress">Question {{ current }}/{{ total }} &mdash; {{ quiz.title }}</p>
+    <div class="progress-bar-bg mb-2"><div class="progress-bar-fill" style="width: {{ (current / total * 100)|round }}%;"></div></div>
+
+    <p class="quiz-question">{{ question.question_text }}</p>
+
+    <form method="POST" action="{{ url_for('quiz.show_question') }}">
+        <input type="hidden" name="question_id" value="{{ question.question_id }}">
+        {% for opt in options %}
+        <label class="quiz-option">
+            <input type="radio" name="option_id" value="{{ opt.option_id }}" required>
+            {{ opt.option_text }}
+        </label>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-block mt-1">
+            {{ 'Finish Quiz' if current == total else 'Next Question' }}
+        </button>
+    </form>
+</div>
+{% endblock %}

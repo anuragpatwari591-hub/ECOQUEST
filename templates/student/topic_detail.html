@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.name }}{% endblock %}
+{% block content %}
+<a href="{{ url_for('student.topics') }}">&larr; Back to Topics</a>
+<h1>{{ topic.icon }} {{ topic.name }}</h1>
+<p class="text-muted">{{ topic.description }}</p>
+
+<h2 class="mt-2">Lessons</h2>
+<div class="card-grid">
+    {% for l in lessons %}
+    <div class="card">
+        <div class="flex-between">
+            <h4>{{ l.title }}</h4>
+            {% if l.is_completed %}<span class="badge-pill">✅ Done</span>{% endif %}
+        </div>
+        <span class="difficulty-tag">{{ l.difficulty }}</span>
+        <p class="text-muted mt-1">{{ l.introduction }}</p>
+        <a href="{{ url_for('student.lesson_detail', lesson_id=l.lesson_id) }}" class="btn btn-primary btn-sm">
+            {{ 'Review' if l.is_completed else 'Start Lesson' }}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<h2 class="mt-2">Quizzes</h2>
+<div class="card-grid">
+    {% for q in quizzes %}
+    <div class="card">
+        <h4>{{ q.title }}</h4>
+        <p class="text-muted">{{ q.description }}</p>
+        <a href="{{ url_for('quiz.start_quiz', quiz_id=q.quiz_id) }}" class="btn btn-primary btn-sm">Take Quiz</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

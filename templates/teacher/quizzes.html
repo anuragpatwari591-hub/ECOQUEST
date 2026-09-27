@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Manage Quizzes{% endblock %}
+{% block content %}
+<div class="flex-between">
+    <h1>Quizzes</h1>
+    <a href="{{ url_for('teacher.create_quiz') }}" class="btn btn-primary">+ Create Quiz</a>
+</div>
+<table class="data-table">
+    <thead><tr><th>Title</th><th>Topic</th><th>Questions</th><th></th></tr></thead>
+    <tbody>
+    {% for q in quizzes %}
+        <tr>
+            <td>{{ q.title }}</td>
+            <td>{{ q.topic_name }}</td>
+            <td>{{ q.question_count }}</td>
+            <td><a href="{{ url_for('teacher.add_question', quiz_id=q.quiz_id) }}">Add Question</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

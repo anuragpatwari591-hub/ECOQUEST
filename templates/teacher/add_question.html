@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Add Question{% endblock %}
+{% block content %}
+<h1>Add Question to: {{ quiz.title }}</h1>
+<form method="POST" class="card" style="max-width:600px;">
+    <div class="form-group">
+        <label for="question_text">Question</label>
+        <textarea id="question_text" name="question_text" class="form-control" rows="2" required></textarea>
+    </div>
+    {% for i in range(1, 5) %}
+    <div class="form-group">
+        <label for="option_{{ i }}">Option {{ i }}</label>
+        <input type="text" id="option_{{ i }}" name="option_{{ i }}" class="form-control" required>
+    </div>
+    {% endfor %}
+    <div class="form-group">
+        <label for="correct_option">Correct Option</label>
+        <select id="correct_option" name="correct_option" class="form-control" required>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+            <option value="4">Option 4</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Question</button>
+</form>
+
+<div class="card mt-2" style="max-width:600px;">
+    <h3>Existing Questions ({{ existing_questions|length }})</h3>
+    <ul>
+    {% for q in existing_questions %}
+        <li>{{ q.question_text }}</li>
+    {% endfor %}
+    </ul>
+    <a href="{{ url_for('teacher.quizzes') }}" class="btn btn-outline btn-sm">Done</a>
+</div>
+{% endblock %}

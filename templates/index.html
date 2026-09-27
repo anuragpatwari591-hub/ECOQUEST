@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero">
+    <h1>Learn. Play. Act. Make an Impact.</h1>
+    <p>EcoQuest is a gamified environmental education platform that turns learning about sustainability into
+       an engaging journey of lessons, quizzes, real-world challenges, XP and badges.</p>
+    <div class="hero-actions">
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Start Learning</a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-outline">Login</a>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Why EcoQuest?</h2>
+    <p class="text-center text-muted" style="max-width:700px;margin:0 auto;">
+        Traditional environmental education is often theoretical and fails to engage students meaningfully.
+        EcoQuest addresses this by combining structured lessons with gamification &mdash; XP, levels, badges,
+        streaks and leaderboards &mdash; so students stay motivated to learn and act on sustainability topics,
+        while teachers get a simple digital tool to support classroom learning.
+    </p>
+</section>
+
+<section class="section">
+    <h2>Explore Environmental Topics</h2>
+    <div class="card-grid">
+        <div class="card text-center"><div class="topic-icon">🌍</div><h3>Climate Change</h3></div>
+        <div class="card text-center"><div class="topic-icon">🏭</div><h3>Pollution</h3></div>
+        <div class="card text-center"><div class="topic-icon">♻️</div><h3>Waste Management</h3></div>
+        <div class="card text-center"><div class="topic-icon">💧</div><h3>Water Conservation</h3></div>
+        <div class="card text-center"><div class="topic-icon">⚡</div><h3>Renewable Energy</h3></div>
+        <div class="card text-center"><div class="topic-icon">🌳</div><h3>Biodiversity</h3></div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>How It Works</h2>
+    <div class="how-it-works">
+        <div class="how-step"><div class="step-icon">📖</div><h4>Learn</h4><p class="text-muted">Read topic-based lessons</p></div>
+        <div class="how-step"><div class="step-icon">🎮</div><h4>Play</h4><p class="text-muted">Take quizzes for XP</p></div>
+        <div class="how-step"><div class="step-icon">🌿</div><h4>Complete</h4><p class="text-muted">Do real-world challenges</p></div>
+        <div class="how-step"><div class="step-icon">🏆</div><h4>Earn</h4><p class="text-muted">Level up and unlock badges</p></div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Features</h2>
+    <div class="card-grid">
+        <div class="card"><h4>📚 Interactive Learning</h4><p class="text-muted">Bite-sized lessons across 6 environmental topics.</p></div>
+        <div class="card"><h4>📝 Quizzes</h4><p class="text-muted">Multiple-choice quizzes with instant scoring.</p></div>
+        <div class="card"><h4>🌱 Challenges</h4><p class="text-muted">Real-world eco-friendly actions students can complete.</p></div>
+        <div class="card"><h4>⭐ XP &amp; Levels</h4><p class="text-muted">Earn XP for every activity and level up.</p></div>
+        <div class="card"><h4>🏅 Badges</h4><p class="text-muted">Unlock achievements automatically as you progress.</p></div>
+        <div class="card"><h4>📊 Leaderboards</h4><p class="text-muted">See how you rank among classmates.</p></div>
+        <div class="card"><h4>📈 Progress Tracking</h4><p class="text-muted">Track completion across every topic.</p></div>
+        <div class="card"><h4>🧑‍🏫 Teacher Tools</h4><p class="text-muted">Create quizzes and challenges, track class performance.</p></div>
+    </div>
+</section>
+
+<section class="hero">
+    <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Start Learning Today</a>
+</section>
+{% endblock %}

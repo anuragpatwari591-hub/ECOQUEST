@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+<div class="flex-between">
+    <h1>Users</h1>
+    <a href="{{ url_for('admin.create_user') }}" class="btn btn-primary">+ Create User</a>
+</div>
+<table class="data-table">
+    <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Class</th><th>XP</th><th>Joined</th><th></th></tr></thead>
+    <tbody>
+    {% for u in users %}
+        <tr>
+            <td>{{ u.name }}</td>
+            <td>{{ u.email }}</td>
+            <td>{{ u.role|title }}</td>
+            <td>{{ u.class_name or '-' }}</td>
+            <td>{{ u.total_xp }}</td>
+            <td>{{ u.created_at.strftime('%d %b %Y') }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('admin.delete_user', user_id=u.user_id) }}" data-confirm="Delete {{ u.name }}? This cannot be undone.">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

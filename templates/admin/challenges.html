@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Challenges{% endblock %}
+{% block content %}
+<h1>Challenges</h1>
+<table class="data-table">
+    <thead><tr><th>Title</th><th>Category</th><th>XP</th><th>Active</th><th>Toggle</th></tr></thead>
+    <tbody>
+    {% for c in challenges %}
+        <tr>
+            <td>{{ c.title }}</td><td>{{ c.category }}</td><td>{{ c.xp_reward }}</td>
+            <td>{{ 'Yes' if c.is_active else 'No' }}</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="challenge_id" value="{{ c.challenge_id }}">
+                    <input type="hidden" name="is_active" value="{{ 0 if c.is_active else 1 }}">
+                    <button type="submit" class="btn btn-outline btn-sm">{{ 'Deactivate' if c.is_active else 'Activate' }}</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

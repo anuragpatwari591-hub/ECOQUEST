@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+<h1>My Profile</h1>
+<div class="card" style="max-width:500px;">
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Class:</strong> {{ user.class_name or '-' }}</p>
+    <p><strong>Institution:</strong> {{ user.institution or '-' }}</p>
+    <p><strong>Level:</strong> {{ level }}</p>
+    <p><strong>Total XP:</strong> {{ user.total_xp }}</p>
+    <p><strong>Current Streak:</strong> {{ user.current_streak }} days</p>
+    <p><strong>Longest Streak:</strong> {{ user.longest_streak }} days</p>
+    <p><strong>Member Since:</strong> {{ user.created_at.strftime('%d %b %Y') }}</p>
+</div>
+{% endblock %}

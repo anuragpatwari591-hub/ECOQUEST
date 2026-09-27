@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Students{% endblock %}
+{% block content %}
+<h1>Students</h1>
+<table class="data-table">
+    <thead><tr><th>Name</th><th>Email</th><th>Class</th><th>Level</th><th>XP</th><th>Streak</th><th>Badges</th><th></th></tr></thead>
+    <tbody>
+    {% for s in students %}
+        <tr>
+            <td>{{ s.name }}</td>
+            <td>{{ s.email }}</td>
+            <td>{{ s.class_name or '-' }}</td>
+            <td>{{ s.level }}</td>
+            <td>{{ s.total_xp }}</td>
+            <td>🔥 {{ s.current_streak }}</td>
+            <td>{{ s.badge_count }}</td>
+            <td><a href="{{ url_for('teacher.student_detail', student_id=s.user_id) }}">View</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

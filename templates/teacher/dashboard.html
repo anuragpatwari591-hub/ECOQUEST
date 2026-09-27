@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Teacher Dashboard{% endblock %}
+{% block content %}
+<h1>Teacher Dashboard</h1>
+<div class="card-grid mb-2">
+    <div class="stat-tile"><div class="stat-value">{{ total_students }}</div><div class="stat-label">Total Students</div></div>
+    <div class="stat-tile alt"><div class="stat-value">{{ active_students }}</div><div class="stat-label">Active (7 days)</div></div>
+    <div class="stat-tile"><div class="stat-value">{{ avg_score }}%</div><div class="stat-label">Avg Quiz Score</div></div>
+    <div class="stat-tile alt"><div class="stat-value">{{ quiz_attempts }}</div><div class="stat-label">Quiz Attempts</div></div>
+    <div class="stat-tile"><div class="stat-value">{{ challenges_completed }}</div><div class="stat-label">Challenges Completed</div></div>
+</div>
+
+<div class="card-grid">
+    <div class="card">
+        <h3>Topic Completion (avg %)</h3>
+        <canvas id="topicChart" height="150"></canvas>
+    </div>
+    <div class="card">
+        <h3>Quiz Performance (avg %)</h3>
+        <canvas id="quizChart" height="150"></canvas>
+    </div>
+</div>
+
+<div class="mt-2">
+    <a href="{{ url_for('teacher.students') }}" class="btn btn-primary">View Students</a>
+    <a href="{{ url_for('teacher.quizzes') }}" class="btn btn-outline">Manage Quizzes</a>
+    <a href="{{ url_for('teacher.challenges') }}" class="btn btn-outline">Manage Challenges</a>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script>
+new Chart(document.getElementById('topicChart'), {
+    type: 'bar',
+    data: {
+        labels: [{% for t in topic_completion %}"{{ t.name }}",{% endfor %}],
+        datasets: [{ label: 'Avg Progress %', data: [{% for t in topic_completion %}{{ t.avg_progress or 0 }},{% endfor %}], backgroundColor: '#2fb872' }]
+    },
+    options: { scales: { y: { beginAtZero: true, max: 100 } } }
+});
+new Chart(document.getElementById('quizChart'), {
+    type: 'bar',
+    data: {
+        labels: [{% for q in quiz_performance %}"{{ q.title }}",{% endfor %}],
+        datasets: [{ label: 'Avg Score %', data: [{% for q in quiz_performance %}{{ q.avg_pct or 0 }},{% endfor %}], backgroundColor: '#f5a623' }]
+    },
+    options: { scales: { y: { beginAtZero: true, max: 100 } } }
+});
+</script>
+{% endblock %}

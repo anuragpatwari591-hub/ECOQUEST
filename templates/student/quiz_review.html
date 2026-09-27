@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Quiz Review{% endblock %}
+{% block content %}
+<h1>Review: {{ attempt.quiz_title }}</h1>
+<p class="text-muted">Score: {{ attempt.score }}/{{ attempt.total_questions }}</p>
+
+{% for a in answers %}
+<div class="card mb-1" style="border-left: 4px solid {{ 'var(--green-600)' if a.is_correct else '#d9534f' }};">
+    <p><strong>{{ a.question_text }}</strong></p>
+    <p>Your answer: {{ a.selected_text or 'No answer' }} {{ '✅' if a.is_correct else '❌' }}</p>
+    {% if not a.is_correct %}<p class="text-muted">Correct answer: {{ a.correct_text }}</p>{% endif %}
+</div>
+{% endfor %}
+
+<a href="{{ url_for('quiz.history') }}" class="btn btn-outline mt-1">Back to History</a>
+{% endblock %}

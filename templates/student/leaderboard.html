@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Leaderboard{% endblock %}
+{% block content %}
+<h1>🏆 Leaderboard</h1>
+<table class="data-table">
+    <thead><tr><th>Rank</th><th>Student</th><th>Class</th><th>Level</th><th>XP</th><th>Badges</th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+        <tr {% if r.user_id == session.user_id %}style="background: var(--green-100); font-weight:600;"{% endif %}>
+            <td>#{{ r.rnk }}</td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.class_name or '-' }}</td>
+            <td>{{ r.level }}</td>
+            <td>{{ r.total_xp }}</td>
+            <td>{{ r.badge_count }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

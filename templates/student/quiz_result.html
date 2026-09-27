@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Quiz Result{% endblock %}
+{% block content %}
+<div class="card text-center" style="max-width:500px;margin:0 auto;">
+    <h2>Quiz Complete 🎉</h2>
+    <p class="text-muted">{{ quiz.title }}</p>
+    <p style="font-size:2.2rem;font-weight:700;color:var(--green-700);">{{ score }}/{{ total }}</p>
+    <p>Accuracy: {{ accuracy }}%</p>
+    <p class="badge-pill">XP Earned: +{{ xp_earned }}</p>
+    {% if is_perfect %}<p class="badge-pill">🌟 Perfect Score Bonus: +50 XP</p>{% endif %}
+
+    {% for badge in new_badges %}
+        <p class="badge-pill">🏅 Badge Unlocked: {{ badge.icon }} {{ badge.name }}</p>
+    {% endfor %}
+
+    <div class="mt-2">
+        <a href="{{ url_for('quiz.review', attempt_id=attempt_id) }}" class="btn btn-outline">Review Answers</a>
+        <a href="{{ url_for('quiz.list_quizzes') }}" class="btn btn-primary">Back to Quizzes</a>
+    </div>
+</div>
+{% endblock %}

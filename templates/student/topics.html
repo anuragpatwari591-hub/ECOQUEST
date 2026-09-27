@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Topics{% endblock %}
+{% block content %}
+<h1>Environmental Topics</h1>
+<div class="card-grid">
+    {% for t in topics %}
+    <div class="card">
+        <div class="topic-icon">{{ t.icon }}</div>
+        <h3>{{ t.name }}</h3>
+        <p class="text-muted">{{ t.description }}</p>
+        <p class="text-muted" style="font-size:0.85rem;">{{ t.lesson_count }} lessons</p>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: {{ t.progress_percent }}%;"></div></div>
+        <a href="{{ url_for('student.topic_detail', topic_id=t.topic_id) }}" class="btn btn-primary btn-sm mt-1">Explore</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

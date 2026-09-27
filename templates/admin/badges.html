@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Badges{% endblock %}
+{% block content %}
+<h1>Badges</h1>
+<table class="data-table">
+    <thead><tr><th>Icon</th><th>Name</th><th>Description</th><th>Earned By</th></tr></thead>
+    <tbody>
+    {% for b in badges %}
+        <tr><td>{{ b.icon }}</td><td>{{ b.name }}</td><td>{{ b.description }}</td><td>{{ b.earned_count }} students</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
